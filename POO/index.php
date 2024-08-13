@@ -1,7 +1,7 @@
 <?php
 
     require "MostrarPeliculas.php";
-
+    
     $peliculas = new MostrarPeliculas();
 
     $array_peliculas = $peliculas->get_peliculas();
@@ -20,10 +20,10 @@
 
         foreach($array_peliculas as $pelicula){
             echo "<tabea><tr><td>";
-            echo $pelicula["id_pelicula"] . "</td><td>";
-            echo $pelicula["titulo"] . "</td><td>";
-            echo $pelicula["duracion"] . "</td><td>";
-            echo $pelicula["genero"] . "</td><td></tr></table>";
+            echo $pelicula["id"] . "</td><td>";
+            echo $pelicula["nombre"] . "</td><td>";
+            echo $pelicula["descripcion"] . "</td><td>";
+            echo $pelicula["precio"] . "</td><td></tr></table>";
             echo "<br>";
             echo "<br>";
         }

@@ -1,10 +1,10 @@
 <?php
 
-    define("DB_HOST", "localhost");
-    define("DB_USUARIO", "root");
-    define("DB_PASSWORD", "root");
-    define("DB_NOMBRE", "peliculas_cac_java");
+    define('DB_HOST', 'localhost');
+    define('DB_USUARIO', 'root');
+    define('DB_PASSWORD', '');
+    define('DB_NOMBRE', 'tienda');
 
-    define("CHARSET", "utf8");
+    define('CHARSET', 'utf8');
 
 ?>
