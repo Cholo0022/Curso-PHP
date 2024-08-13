@@ -7,8 +7,7 @@
 </head>
 <body>
     <form action="consultaPDO.php" method="get">
-        Articulo: <input type="text" name="buscar_nombre"> <br><br>
-        Color:    <input type="text" name="buscar_color"> <br><br>
+        <label>Buscar: <input type="text" name="buscar"></label>
         <input type="submit" value="Buscar!">
     </form>
 </body>

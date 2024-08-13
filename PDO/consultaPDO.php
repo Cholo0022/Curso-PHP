@@ -8,22 +8,22 @@
 <body>
 <?php
 
-    $buscar_nombre= $_GET["buscar_nombre"];
-    $buscar_color = $_GET["buscar_color"];
+    $busqueda= $_GET["buscar"];
+
     try {
-    $conexion = new PDO('mysql:host=localhost; dbname=mare', 'root', '');
+    $conexion = new PDO('mysql:host=localhost; dbname=mare', 'root', 'root');
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conexion->exec("SET CHARACTER SET utf8");
-    //echo "Conexión exitosa";
-    //echo $busqueda;
-    $sql = "SELECT name, price, stock, color FROM products WHERE name = :nombre OR color = :color_art";
+    echo "Conexión exitosa";
+    echo $busqueda;
+    $sql = "SELECT name, price, stock, color FROM products WHERE name = ?";
 
     $result=$conexion->prepare($sql);
-    $result->execute(array(":nombre"=>$buscar_nombre, ":color_art"=>$buscar_color));
+    $result->execute(array($busqueda));
 
     
     while($registro=$result->fetch(PDO::FETCH_ASSOC)) {
-        echo "Producto: " . $registro["name"] . " - Precio: " . $registro["price"] . " - Stock: " . $registro["stock"] . " - Color: " . $registro["color"] . "<br>";
+        echo "Producto: " . $registro["name"] . "Precio: " . $registro["price"] . "Stock: " . $registro["stock"] . "Color: " . $registro["color"] . "<br>";
     }
 
     $result->closeCursor();
