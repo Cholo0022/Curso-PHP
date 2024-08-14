@@ -27,7 +27,9 @@
         $registrado = $result->rowCount();
 
         if ($registrado!=0){
-            echo "<h2>Bienvenido!</h2>";
+            session_start();
+            $_SESSION["usuario"] = $_POST["usuario"];
+            header("location:Usuario_registrado.php");
         }else{
             header("location:Formulario_login.php");
         }
