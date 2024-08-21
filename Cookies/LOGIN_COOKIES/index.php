@@ -59,7 +59,7 @@
     echo "Hola " . $_POST["usuario"] . "!";
     
    } elseif (isset($_COOKIE["nombre_usuario"])){
-    echo "Hola " . $_COOKIE["nombre_usuario"] . "!";
+    echo "Hola " . $_COOKIE["nombre_usuario"] . " !";
    }
 
 
