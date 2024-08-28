@@ -7,7 +7,7 @@ class Products_model{
 
     public function __construct(){
 
-        require_once("Conectar.php");
+        require_once("model/Conectar.php");
         $this->db=Conectar::conexion();
         $this->products=array();
     }
@@ -20,6 +20,8 @@ class Products_model{
 
         return $this->products;
     }
+
+    
 }
 
 ?>
