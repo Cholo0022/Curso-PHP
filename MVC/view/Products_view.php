@@ -19,19 +19,22 @@
             <th>Precio</th>
         </tr>
 
-        <?php
+        <?php foreach ($matrizProduct as $product): ?>
 
-        foreach ($matrizProduct as $product) {
+            <tr><td> <?php $product["id"]  ?> </td>
+            <tr><td> <?php $product["nombre"]  ?> </td>
+            <tr><td> <?php $product["descripcion"]  ?> </td>
+            <tr><td> <?php $product["precio"]  ?> </td>
+            <td>
+               <a href="borrar_registro.php?id=<?php echo $product["id"] ?>"><input type="button" name="borrar"  id="borrar" value="Borrar"></a>
+            </td>
+            <td>
+                <a href="editar_registro.php?id=<?php echo $product["id"] ?>&nombre=<?php echo $product["nombre"] ?>&descripcion=<?php echo $product["descripcion"] ?>&precio=<?php echo $product["precio"] ?> "><input type="button" name="modificar"  id="modificar" value="Modificar"></a>
+            </td>
 
-            echo "<tr><td>" . $product["id"] . "</td>";
-            echo "<td>" . $product["nombre"] . "</td>";
-            echo "<td>" . $product["descripcion"] . "</td>";
-            echo "<td>" . $product["precio"] . "</td>";
-            echo "<td><input type='button' name='borrar' id='borrar' value='Borrar'></td>";
-            echo "<td><input type='button' name='modificar' id='modificar' value='Modificar'></td></tr>";
-        }
+        <?php endforeach ?>
 
-        ?>
+    
         <tr>
                 <td></td>
                 <td><input type="text" name="nombre" id="nombre"></td>
@@ -45,10 +48,12 @@
         <ul class="pagination justify-content-center">
             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 
-            <?php for ($i = 1; $i <= $cantidad_paginas; $i++): ?>
+            <?php for ($i = 1; $i <= 5/*$cantidad_paginas*/; $i++): ?>
+                
                 <li class="page-item">
                     <a class="page-link" href="?pagina=<?= $i; ?>"><?= $i; ?></a>
                 </li>
+                
             <?php endfor; ?>
 
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
