@@ -27,6 +27,9 @@
             background-color: #f2f2f2;
             /* Color de fondo para los encabezados */
         }
+        h1{
+            text-align: center;
+        }
     </style>
 </head>
 <body>

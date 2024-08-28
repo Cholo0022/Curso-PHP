@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <h1>MVC con paginación</h1>
     <table>
         <tr>
             <th>ID</th>
@@ -19,23 +20,25 @@
             <th>Precio</th>
         </tr>
 
-        <?php foreach ($matrizProduct as $product): ?>
+        <?php foreach ($matrizProduct as $product):?>
 
-            <tr><td> <?php $product["id"]  ?> </td>
-            <tr><td> <?php $product["nombre"]  ?> </td>
-            <tr><td> <?php $product["descripcion"]  ?> </td>
-            <tr><td> <?php $product["precio"]  ?> </td>
+        <tr>
+            <td> <?php echo $product["id"] ?> </td>
+            <td> <?php echo $product["nombre"] ?> </td>
+            <td> <?php echo $product["descripcion"] ?> </td>
+            <td> <?php echo $product["precio"] ?> </td>
             <td>
                <a href="borrar_registro.php?id=<?php echo $product["id"] ?>"><input type="button" name="borrar"  id="borrar" value="Borrar"></a>
             </td>
             <td>
                 <a href="editar_registro.php?id=<?php echo $product["id"] ?>&nombre=<?php echo $product["nombre"] ?>&descripcion=<?php echo $product["descripcion"] ?>&precio=<?php echo $product["precio"] ?> "><input type="button" name="modificar"  id="modificar" value="Modificar"></a>
             </td>
+        </tr>
 
         <?php endforeach ?>
 
     
-        <tr>
+            <tr>
                 <td></td>
                 <td><input type="text" name="nombre" id="nombre"></td>
                 <td><input type="text" name="descripcion" id="descripcion"></td>
@@ -48,7 +51,7 @@
         <ul class="pagination justify-content-center">
             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 
-            <?php for ($i = 1; $i <= 5/*$cantidad_paginas*/; $i++): ?>
+            <?php for ($i = 1; $i <= $cantidad_paginas; $i++): ?>
                 
                 <li class="page-item">
                     <a class="page-link" href="?pagina=<?= $i; ?>"><?= $i; ?></a>

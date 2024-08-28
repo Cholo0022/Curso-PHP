@@ -13,7 +13,8 @@ class Products_model{
     }
     
     public function getProducts (){
-        $consult=$this->db->query("SELECT * FROM productos");
+        require("paginacion_model.php");
+        $consult=$this->db->query("SELECT * FROM productos LIMIT $empezar_desde, $registros_por_pagina");
         while($row=$consult->fetch(PDO::FETCH_ASSOC)){
             $this->products[]=$row;
         }
