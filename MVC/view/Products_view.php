@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    
     <h1>MVC con paginación</h1>
     <table>
         <tr>
@@ -28,10 +29,10 @@
             <td> <?php echo $product["descripcion"] ?> </td>
             <td> <?php echo $product["precio"] ?> </td>
             <td>
-               <a href="borrar_registro.php?id=<?php echo $product["id"] ?>"><input type="button" name="borrar"  id="borrar" value="Borrar"></a>
+               <a href="model/Producto_borrar.php?id=<?php echo $product["id"] ?>"><input type="button" name="borrar"  id="borrar" value="Borrar"></a>
             </td>
             <td>
-                <a href="editar_registro.php?id=<?php echo $product["id"] ?>&nombre=<?php echo $product["nombre"] ?>&descripcion=<?php echo $product["descripcion"] ?>&precio=<?php echo $product["precio"] ?> "><input type="button" name="modificar"  id="modificar" value="Modificar"></a>
+                <a href="view/Products_modificar.php?id=<?php echo $product["id"] ?>&nombre=<?php echo $product["nombre"] ?>&descripcion=<?php echo $product["descripcion"] ?>&precio=<?php echo $product["precio"] ?> "><input type="button" name="modificar"  id="modificar" value="Modificar"></a>
             </td>
         </tr>
 
@@ -51,7 +52,9 @@
         <ul class="pagination justify-content-center">
             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 
-            <?php for ($i = 1; $i <= $cantidad_paginas; $i++): ?>
+            <?php
+            require("model/paginacion_model.php");
+            for ($i = 1; $i <= $cantidad_paginas; $i++): ?>
                 
                 <li class="page-item">
                     <a class="page-link" href="?pagina=<?= $i; ?>"><?= $i; ?></a>
