@@ -1,4 +1,6 @@
 <?php
+require("Conectar.php");
+$conexion=Conectar::conexion();
 $nombre_imagen = $_FILES["imagen"]["name"];
 $tipo_imagen = $_FILES["imagen"]["type"];
 $tamanio_imagen = $_FILES["imagen"]["size"];
@@ -8,13 +10,30 @@ if ($tamanio_imagen <= 2000000) {
     //Ruta de la carpeta destino en el servidor
     $carpeta_destino = $_SERVER['DOCUMENT_ROOT'].'./imagenes_servidor/img/';
 
-    if ($_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+    if ($tipo_imagen == "jpg" || $tipo_imagen == "jpeg" || $tipo_imagen == "png" || $tipo_imagen == "gif") {
         move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino.$nombre_imagen);
+        $sql = "INSERT INTO imagenes (imagen) VALUES (:nombreImagen)";
+        $result = $conexion->prepare($sql);
+        $result->execute(array(":nombreImagen"=>$nombre_imagen));
     } else {
-        echo "Error al subir la imagen: ".$_FILES['imagen']['error'];
+        echo "Solo se permiten archivos de tipo jgp, jpeg, png y gif";
     }
     
 } else {
     echo "Tamaño de imagen mayor a 2MB";
 }
+
+$sql="SELECT * FROM imagenes";
+$result=$conexion->prepare($sql);
+$result->execute(array());
 ?>
+<?php while ($registro=$result->fetch(PDO::FETCH_ASSOC)): 
+    
+    $ruta_imagen = $registro["imagen"]; ?>
+    <img src="./img/<?php echo $ruta_imagen?>" width="250">
+<?php endwhile; ?>
+
+
+
+
+
