@@ -5,7 +5,9 @@ $nombre_archivo = $_FILES["archivo"]["name"];
 $tipo_archivo = $_FILES["archivo"]["type"];
 $tamanio_archivo = $_FILES["archivo"]["size"];
 
-echo $tamanio_archivo;
+echo $nombre_archivo . "<br>";
+echo $tipo_archivo . "<br>";
+echo $tamanio_archivo . "<br>";
 if ($tamanio_archivo <= 2000000) {
     //Ruta de la carpeta destino en el servidor
     $carpeta_destino = $_SERVER['DOCUMENT_ROOT'].'./archivos_blob/archivos/';
