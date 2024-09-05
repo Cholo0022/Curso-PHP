@@ -6,7 +6,7 @@
     <title>Blog</title>
 </head>
 <body>
-    <form action="insertar_contenido.php" method="post">
+    <form action="../controller/Transactions.php" method="post">
         <label>Titulo: <input type="text" name="titulo"></label><br><br>
         <label>Comentario: </label><br>
         <textarea name="comentario"></textarea><br><br>
