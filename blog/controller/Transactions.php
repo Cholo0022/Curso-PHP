@@ -10,8 +10,8 @@
 <body>
     <?php
 
-    include("../model/Object_Blog.php");
-    include("../model/Handle_Object_Blog.php");
+    include_once("../model/Object_Blog.php");
+    include_once("../model/Handle_Object_Blog.php");
 
     try {
 
@@ -45,9 +45,9 @@
         }
         $handle_object = new Handle_Object_Blog($conexion);
 
-        $blog = new Blog();
+        $blog = new Object_Blog();
         $blog->setTitle(htmlentities(addcslashes($_POST["title"]), ENT_QUOTES));
-        $blog->setTitle(htmlentities(addcslashes($_POST["comment"]), ENT_QUOTES));
+        $blog->setComment(htmlentities(addcslashes($_POST["comment"]), ENT_QUOTES));
         $blog->setDate("Y-m-d H:i:s");
         $blog->setImage($_FILES["image"]);
 
