@@ -7,10 +7,10 @@
 </head>
 <body>
     <form action="../controller/Transactions.php" method="post">
-        <label>Titulo: <input type="text" name="titulo"></label><br><br>
+        <label>Titulo: <input type="text" name="title"></label><br><br>
         <label>Comentario: </label><br>
-        <textarea name="comentario"></textarea><br><br>
-        <input type="file" name="imagen"><br>
+        <textarea name="comment"></textarea><br><br>
+        <input type="file" name="image"><br>
         <label>La imagen no debe ser mayor a 2MB</label> <br><br>
         <input type="submit" value="Enviar">
         <a href="http://">Visualizar BLOG</a>
