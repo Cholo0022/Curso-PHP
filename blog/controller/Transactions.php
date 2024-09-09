@@ -8,16 +8,17 @@
 </head>
 
 <body>
-    <?php
+<?php
 
-    include_once("../model/Object_Blog.php");
-    include_once("../model/Handle_Object_Blog.php");
+include_once("../model/Object_Blog.php");
+include_once("../model/Handle_Object_Blog.php");
 
-    try {
+try {
+    $conexion = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //echo "Conexión exitosa"; 
 
-        $conexion = new PDO("mysql:host=localhost; dbname=blog", "root", "");
-        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    if (isset($_FILES["image"])) {
         if ($_FILES["image"]["error"]) {
             switch ($_FILES["image"]["error"]) {
                 case 1:
@@ -34,31 +35,44 @@
                     break;
             }
         } else {
-            echo "No hay error en la transmisi{on del archivo <br>";
-            if (isset($_FILES["image"]["name"]) && ($_FILES["image"]["error"] == UPLOAD_ERR_OK)) {
-                $destino_ruta = "img/";
-                move_uploaded_file($_FILES["image"]["tmp"], $destino_ruta) . $_FILES["image"]["name"];
-                echo "El archivo " . $_FILES["image"]["name"] . " se ha copiado en el directorio img";
+            echo "No hay error en la transmisión del archivo <br>";
+            $destino_ruta = dirname(__DIR__, 1) . "/img/" . basename($_FILES["image"]["name"]);
+            //var_dump($destino_ruta);
+
+            if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $destino_ruta)) {
+                    echo "El archivo " . $_FILES["image"]["name"] . " se ha copiado en el directorio img <br>";
+                } else {
+                    echo "No se pudo copiar el archivo " . $_FILES["image"]["name"] . " en el directorio img";
+                }
             } else {
-                echo "El archivo no se ha copiado en el directorio img";
+                echo "El archivo no es válido.";
             }
         }
-        $handle_object = new Handle_Object_Blog($conexion);
+    } 
 
-        $blog = new Object_Blog();
-        $blog->setTitle(htmlentities(addcslashes($_POST["title"]), ENT_QUOTES));
-        $blog->setComment(htmlentities(addcslashes($_POST["comment"]), ENT_QUOTES));
-        $blog->setDate("Y-m-d H:i:s");
-        $blog->setImage($_FILES["image"]);
+    $handle_object = new Handle_Object_Blog($conexion);
 
-        $handle_object->insert_content($blog);
+    $blog = new Object_Blog();
+    $blog->setTitle(htmlentities($_POST["title"], ENT_QUOTES));
+    $blog->setComment(htmlentities($_POST["comment"], ENT_QUOTES));
+    $blog->setDate(date("Y-m-d H:i:s"));
+    $blog->setImage(basename($_FILES["image"]["name"])); 
 
-        echo "<br>Contenido ingresado correctamente al BLOG<BR>";
-    } catch (Exception $e) {
-        die("Error " . $e->getMessage());
-    }
+    echo "Titulo: " . $blog->getTitle() . "<br>";
+    echo "Comentario: " . $blog->getComment() . "<br>";
+    echo "Fecha: " . $blog->getDate() . "<br>";
+    echo "Imagen: " . $blog->getImage() . "<br>";
 
-    ?>
+    $handle_object->insert_content($blog);
+
+    echo "<br> Contenido ingresado correctamente al BLOG <br>";
+} catch (PDOException $e) {
+    die("Error " . $e->getMessage());
+}
+
+?>
+
 </body>
 
 </html>

@@ -7,26 +7,26 @@
         private $conexion;
 
         public function __construct($conexion){
-            $this->setConexion = $conexion;
-        }
+            $this->conexion = $conexion;
+        }      
 
-        public function getConexion(PDO $conexion){
+        public function conexion(PDO $conexion){
             $this->conexion=$conexion;
         }
 
-        public function getContenidoPorFecha($fecha){
+        public function getContenidoPorFecha(){
             $matriz = array();
             $contador=0;
-            $result= $this->conexion->query("SELECT * FROM contenido ORDER BY fecha DESC");
+            $result= $this->conexion->query("SELECT * FROM contenido ORDER BY fecha");
 
-            while($row = $result->fetch_assoc(PDO::FETCH_ASSOC)){
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 
                 $blog = new Object_Blog();
-                $blog->setId = $row["id"];
-                $blog->setTitle = $row["titulo"];
-                $blog->setComment = $row["comentario"];
-                $blog->setDate = $row["fecha"];
-                $blog->setImage = $row["imagen"];
+                $blog->setId($row["id"]);
+                $blog->setTitle($row["titulo"]);
+                $blog->setComment($row["comentario"]);
+                $blog->setDate($row["fecha"]);
+                $blog->setImage($row["imagen"]);
 
                 $matriz[$contador] = $blog;
 
@@ -35,10 +35,19 @@
             return $matriz;
         }
 
-    public function insert_content(Object_Blog $blog){
-        $sql= "INSERT INTO contenido (titulo, fecha, comentario, imagen) VALUES ('" . $blog->getTitle() . "','" . $blog->getDate() . "','" . $blog->getComment() . "','" . $blog->getImage() . "')";
-        $this->conexion->exec($sql);
-    }
+        public function insert_content(Object_Blog $blog){
+            $sql = "INSERT INTO contenido (titulo, fecha, comentario, imagen) VALUES (:title, :date, :comment, :image)";
+            $stmt = $this->conexion->prepare($sql);
+            
+            // Bind parameters
+            $stmt->bindParam(':title', $blog->getTitle());
+            $stmt->bindParam(':date', $blog->getDate());
+            $stmt->bindParam(':comment', $blog->getComment());
+            $stmt->bindParam(':image', $blog->getImage());
+        
+            // Execute statement
+            $stmt->execute();
+        }
     
 }
 
