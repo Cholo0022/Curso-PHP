@@ -1,0 +1,20 @@
+composer global require laravel/installer (instalador que una sola vez se ejecuta el comando)
+
+laravel new nombre-proyecto
+
+php artisan serve (para levantar el servidor)
+
+php artisan make:migration create_notes_table (crear archivo migration table)
+
+php artisan migrate (migrar la tabla a la base de datos)
+
+php artisan migrate:rollback (vuelva atras la  última migración)
+
+php artisan migrate:rollback --batch=2 (ejemplo numero bach vuelva atras dicha migración)
+
+php artisan migrate:reset (vuelva atras todas las migraciones)
+
+Modelo:
+php artisan make:model Note (crea un model Note o sea crea una clase Node)
+
+php artisan make:model Note --migration (en un solo paso creamos el modelo y la migración, evitamos error de nombres)

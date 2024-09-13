@@ -1,6 +1,0 @@
-composer global require laravel/installer (instalador que una sola vez se ejecuta el comando)
-
-laravel new nombre-proyecto
-
-php artisan serve (para levantar el servidor)
-
