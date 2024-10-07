@@ -2,6 +2,10 @@ composer global require laravel/installer (instalador que una sola vez se ejecut
 
 laravel new nombre-proyecto
 
+Para crear un proyecto en Laravel 10:
+composer create-project --prefer-dist laravel/laravel nombreProyecto "10.*"
+
+
 php artisan serve (para levantar el servidor)
 
 php artisan make:migration create_notes_table (crear archivo migration table)
@@ -18,3 +22,18 @@ Modelo:
 php artisan make:model Note (crea un model Note o sea crea una clase Node)
 
 php artisan make:model Note --migration (en un solo paso creamos el modelo y la migración, evitamos error de nombres)
+
+Controladores:
+php artisan make:controller UserController (crea un controlador)
+
+Crear una Request (para validar datos)
+php artisan make:request NoteRequest 
+
+Crear un Controller con el CRUD
+php artisan make:controller PostController --resource
+
+Crear un SEEDER (cargar con info por defecto la DB)
+php artisan make:seeder NombreSeeder
+
+Cargar la base de datos con los datos por defecto de SEEDER
+php artisan db:seed
